@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curfew App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+    }
+    h1 {
+      text-transform: uppercase;
+      color: #E6002E;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <!-- The content will be updated by JavaScript -->
+  </div>
+  <div class="buttons">
+    <button onclick="changeState(0)">Keep drinking</button>
+    <button onclick="changeState(1)">Last round!</button>
+    <button onclick="changeState(2)">Go to bed!</button>
+  </div>
+
+  <script>
+    function updateState(hour) {
+      const container = document.getElementById("container");
+      let state, imageSrc;
+
+      if (hour >= 0 && hour < 24) {
+        if (hour < 24 && hour >= 0) {
+          state = "Keep drinking";
+          imageSrc = "images/keep_drinking2.png"; // Replace with your image URL
+        }
+        if (hour >= 0 && hour < 1) {
+          state = "Last round!";
+          imageSrc = "images/last_round.png"; // Replace with your image URL
+        }
+        if (hour >= 1 && hour < 7) {
+          state = "Go to bed!";
+          imageSrc = "images/go_to_bed.png"; // Replace with your image URL
+        }
+      }
+
+      container.innerHTML = `
+        <h1>${state}</h1>
+        <img src="${imageSrc}" alt="${state}">
+      `;
+    }
+
+    function changeState(state) {
+      let testHour;
+      switch (state) {
+        case 0:
+          testHour = 22;
+          break;
+        case 1:
+          testHour = 0;
+          break;
+        case 2:
+          testHour = 2;
+          break;
+        default:
+          testHour = new Date().getHours();
+      }
+      updateState(testHour);
+    }
+
+    // Initialize the state based on the current time
+    changeState(-1);
+  </script>
+</body>
+</html>
