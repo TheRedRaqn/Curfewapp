@@ -25,6 +25,9 @@
       color: #E6002E;
       font-size: 1.5em;
     }
+    h2 {
+      font-size: 1.2em;
+      color: #E6002E;
     p {
       font-size: 1.2em;
       color: #E6002E;
@@ -117,8 +120,8 @@
       let secondsLeft = 59 - currentSecond;
 
       container.innerHTML = `
-        <h1>${state}</h1>
-        <p>${beerOclock}</p>
+        <h2>${state}</h2>
+        <h1>${beerOclock}</h1>
         <img src="${imageSrc}" alt="${state}">
         <p>${timeLeft} hours ${minutesLeft} minutes ${secondsLeft} seconds</p>
         <button onclick="switchManually()">Switch manually to ${nextState}</button>
