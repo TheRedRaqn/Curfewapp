@@ -95,12 +95,15 @@
       }
 
       let timeLeft;
-      if (nextStateHour > currentHour) {
-        timeLeft = nextStateHour - currentHour;
-      } else
-        {
+        if (nextStateHour > currentHour || (nextStateHour === currentHour && currentMinute > 0)) {
+          timeLeft = nextStateHour - currentHour;
+        } else {
           timeLeft = nextStateHour + 24 - currentHour;
         }
+        if (currentMinute > 0 || currentSecond > 0) {
+          timeLeft -= 1;
+        }
+
       let minutesLeft = 59 - currentMinute;
       let secondsLeft = 59 - currentSecond;
 
