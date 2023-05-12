@@ -78,28 +78,28 @@
       if (currentHour >= 0 && currentHour < 24) {
         if (currentHour >= 7 && currentHour < 17) {
           state = "Workday";
-          beerOclock = "Is it beer o'clock? <br> Not yet, back to work!";
+          beerOclock = "Not yet, back to work!";
           imageSrc = "images/back_to_work.png"; // Same image URL
           nextState = "Beer o'clock";
           nextStateHour = 17;
         }
         else if (currentHour >= 17 && currentHour < 24) {
           state = "Beer o'clock";
-          beerOclock = "Is it beer o'clock? <br> Yes, time to drink!";
+          beerOclock = "Yes, time to drink!";
           imageSrc = "images/keep_drinking2.png"; // Same image URL
           nextState = "Last round";
           nextStateHour = 0;
         }
         else if (currentHour >= 0 && currentHour < 1) {
           state = "Last round";
-          beerOclock = "Is it beer o'clock? <br> Yes but last round!";
+          beerOclock = "Yes but last round!";
           imageSrc = "images/last_round.png"; // Same image URL
           nextState = "Bedtime";
           nextStateHour = 1;
         }
         else if (currentHour >= 1 && currentHour < 7) {
           state = "Bedtime";
-          beerOclock = "Is it beer o'clock? <br> No! Get to bed!";
+          beerOclock = "No! Get to bed!";
           imageSrc = "images/go_to_bed.png"; // Same image URL
           nextState = "Workday";
           nextStateHour = 7;
@@ -120,7 +120,7 @@
       let secondsLeft = 59 - currentSecond;
 
       container.innerHTML = `
-        <h2>${state}</h2>
+        <h2>Is it beer o'clock?</h2>
         <h1>${beerOclock}</h1>
         <img src="${imageSrc}" alt="${state}">
         <p>${timeLeft} hours ${minutesLeft} minutes ${secondsLeft} seconds</p>
