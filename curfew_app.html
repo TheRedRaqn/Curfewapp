@@ -74,9 +74,13 @@
     var stateOverride = null;
 
     var urlParams = new URLSearchParams(window.location.search);
-    if(urlParams.has('state')) {
-        stateOverride = parseInt(urlParams.get('state'));
+if(urlParams.has('state')) {
+    stateOverride = parseInt(urlParams.get('state'));
+    if (isNaN(stateOverride) || stateOverride < 0 || stateOverride > 3) {
+        stateOverride = null;
     }
+}
+
 
     function updateState() {
       const container = document.getElementById("container");
