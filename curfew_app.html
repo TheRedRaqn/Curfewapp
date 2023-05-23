@@ -73,10 +73,13 @@
 
     
     var urlParams = new URLSearchParams(window.location.search);
-      if(urlParams.has('state')) {
-          var state = urlParams.get('state');
-          changeState(state);
-      }
+if(urlParams.has('state')) {
+    var state = parseInt(urlParams.get('state'));
+    changeState(state);
+} else {
+    changeState(-1);
+}
+
 
     function updateState() {
       const container = document.getElementById("container");
