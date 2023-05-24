@@ -28,6 +28,7 @@
     h2 {
       font-size: 1.2em;
       color: #E6002E;
+    }
     p {
       font-size: 1.2em;
       color: #E6002E;
@@ -71,66 +72,60 @@
     var currentSecond = new Date().getSeconds();
     var nextStateHour;
     var stateOverride = null;
+    var locale = null;
 
     var urlParams = new URLSearchParams(window.location.search);
 
     if (urlParams.has('locale')) {
-      var locale = urlParams.get('locale');
-        if (locale === 'nl') {
-          stateOverride = 1;
-        } else if (locale === 'de') {
-          stateOverride = 0;
-        } else {
-          stateOverride = null;
-        }
+      locale = urlParams.get('locale');
+      if (locale === 'nl') {
+        stateOverride = 1;
+      } else if (locale === 'de') {
+        stateOverride = 0;
+      } else {
+        stateOverride = null;
+      }
     }
 
     if(urlParams.has('state')) {
-        stateOverride = parseInt(urlParams.get('state'));
-        if (isNaN(stateOverride) || stateOverride < 0 || stateOverride > 3) {
-            stateOverride = null;
-        }
-
+      stateOverride = parseInt(urlParams.get('state'));
+      if (isNaN(stateOverride) || stateOverride < 0 || stateOverride > 3) {
+          stateOverride = null;
+      }
     }
-
 
     function updateState() {
       const container = document.getElementById("container");
       let state, imageSrc, nextState, beerOclock;
 
       if (stateOverride !== null) {
-              currentHour = (stateOverride === 0 ? 7 : stateOverride === 1 ? 17 : stateOverride === 2 ? 0 : 1);
-            }
+        currentHour = (stateOverride === 0 ? 7 : stateOverride === 1 ? 17 : stateOverride === 2 ? 0 : 1);
+      }
 
-      if (currentHour >= 0 && currentHour < 24) {
-        if (currentHour >= 7 && currentHour < 17) {
-          state = "Workday";
-          beerOclock = "Not yet, back to work!";
-          imageSrc = "images/back_to_work.png"; // Same image URL
-          nextState = "Beer o'clock";
-          nextStateHour = 17;
-        }
-        else if (currentHour >= 17 && currentHour < 24) {
-          state = "Beer o'clock";
-          beerOclock = "Yes, time to drink!";
-          imageSrc = "images/keep_drinking2.png"; // Same image URL
-          nextState = "Last round";
-          nextStateHour = 0;
-        }
-        else if (currentHour >= 0 && currentHour < 1) {
-          state = "Last round";
-          beerOclock = "Yes but last round!";
-          imageSrc = "images/last_round.png"; // Same image URL
-          nextState = "Bedtime";
-          nextStateHour = 1;
-        }
-        else if (currentHour >= 1 && currentHour < 7) {
-          state = "Bedtime";
-          beerOclock = "No! Get to bed!";
-          imageSrc = "images/go_to_bed.png"; // Same image URL
-          nextState = "Workday";
-          nextStateHour = 7;
-        }
+      if (currentHour >= 7 && currentHour < 17) {
+        state = "Workday";
+        beerOclock = "Not yet, back to work!";
+        imageSrc = locale === 'nl' ? "images/Wai-and-Jan.png" : "images/back_to_work.png"; 
+        nextState = "Beer o'clock";
+        nextStateHour = 17;
+      } else if (currentHour >= 17 && currentHour < 24) {
+        state = "Beer o'clock";
+        beerOclock = "Yes, time to drink!";
+        imageSrc = "images/keep_drinking2.png";
+        nextState = "Last round";
+        nextStateHour = 0;
+      } else if (currentHour >= 0 && currentHour < 1) {
+        state = "Last round";
+        beerOclock = "Yes but last round!";
+        imageSrc = "images/last_round.png"; 
+        nextState = "Bedtime";
+        nextStateHour = 1;
+      } else if (currentHour >= 1 && currentHour < 7) {
+        state = "Bedtime";
+        beerOclock = "No! Get to bed!";
+        imageSrc = "images/go_to_bed.png"; 
+        nextState = "Workday";
+        nextStateHour = 7;
       }
 
       let timeLeft;
@@ -162,7 +157,6 @@
 
     updateState();
 
-    // Updating the state every second
     setInterval(() => {
       currentSecond++;
       if (currentSecond >= 60) {
@@ -178,7 +172,6 @@
       }
       updateState();
     }, 1000);
-
   </script>
 </body>
 </html>
